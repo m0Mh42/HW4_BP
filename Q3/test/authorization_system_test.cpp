@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include "../include/user_operations.h"
-/*
+
 // Test 1
 TEST(UserOperations, TEST1) {
     const char *backup_file_name = "resources/HW4_Datasets.txt";
@@ -324,4 +324,3 @@ TEST(UserOperations, TEST11) {
     free(stored_data);
     remove(backup_file_name);
 } 
-*/
