@@ -1,0 +1,18 @@
+name: Question-3
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: [ "Q3/**" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Build docker image
+        run: cd Q3/ && docker build -t my-image .
+      - name: Run the code
+        run: cd Q3/ && docker run my-image
