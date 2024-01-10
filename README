@@ -1,0 +1,4 @@
+### Concerning Q3
+
+There existed a requirement of command-line actions in `Q3` which meant implementing of a command-line interpreter in program sourcecode, in which no test cases included such feature.
+The function `cmdline` in Q3 is responsible for command-line interpretion.

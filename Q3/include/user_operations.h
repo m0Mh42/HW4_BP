@@ -9,5 +9,6 @@ void delete_user(char ***stored_data, int *size, const char *user_name);
 void email_cnt(char **stored_data, int size);
 void end_program(char ***stored_data, int size);
 void format_username(char **name);
+void cmdline(char *input, char ***stored_data, int *size);
 
 #endif // USER_OPERATIONS_H

@@ -255,3 +255,55 @@ void end_program(char ***stored_data, int size)
     }
     free(*stored_data);
 }
+
+void cmdline(char *input, char ***stored_data, int *size)
+{
+    char *command = strtok(input, " ");
+    if (strcmp(command, "showusers"))
+    {
+        show_users(*stored_data, *size);
+    }
+    else if (strcmp(command, "newuser"))
+    {
+        char *username = strtok(NULL, " ");
+        if (username == NULL)
+        {
+            printf("No username input.\n");
+            return;
+        }
+
+        char *email = strtok(NULL, " ");
+        if (email == NULL)
+        {
+            printf("No email input.\n");
+            return;
+        }
+
+        char *password = strtok(NULL, " ");
+        if (password == NULL)
+        {
+            printf("No password input.\n");
+            return;
+        }
+        new_user(stored_data, size, username, email, password);
+    }
+    else if (strcmp(command, "deluser"))
+    {
+        char *username = strtok(NULL, " ");
+        if (username == NULL)
+        {
+            printf("No username input.\n");
+            return;
+        }
+        delete_user(stored_data, size, username);
+    }
+    else if (strcmp(command, "emailcnt"))
+    {
+        email_cnt(*stored_data, *size);
+    }
+    else
+    {
+        printf("Unknown command.\n");
+        return;
+    }
+}
