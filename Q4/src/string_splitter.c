@@ -1,32 +1,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h> 
+#include <ctype.h>
 
-char** splitString(const char *input, char delimiter, int *substringCount) {
-    // Hint 1: Count delimiters to determine substring count.
-    // Hint 2: extract and allocate memory for each substring.
+char **splitString(const char *input, char delimiter, int *substringCount)
+{
+    int count = 1;
+    char delimiters[] = {delimiter, 0};
 
+    // counting words
+    const char *tmp = input;
+    while (tmp = strstr(tmp, delimiters))
+    {
+        count++;
+        tmp++;
+    }
 
-    // Sample Case 1:
-    // Input: "One;Two;Three;Four", delimiter = ';', substringCount points to an integer
-    // Expected Output: ["One", "Two", "Three", "Four"]
-    // After execution, *substringCount should be updated to 4
+    // copying input
+    char *copy;
+    size_t input_len = strlen(input) + 1;
+    copy = (char *)malloc(input_len * sizeof(char));
+    strcpy(copy, input);
 
-    // Sample Case 2:
-    // Input: "SingleString", delimiter = ',', substringCount points to an integer
-    // Expected Output: ["SingleString"]
-    // After execution, *substringCount should be updated to 1
+    char **split;
+    split = (char **)malloc(count * sizeof(char *));
 
+    // finding words
+    char *ptr = copy;
+    for (int i = 0; i < count; i++)
+    {
+        char *p = strpbrk(ptr, delimiters);
+        if (p != NULL)
+            *p = 0; // null terminating for strcpy
+        char *ret = ptr;
+        size_t ret_len = strlen(ret) + 1;
+        split[i] = (char *)malloc(ret_len * sizeof(char));
+        strcpy(split[i], ret);
+        ptr = ++p; // continuing word search after the null termination
+    }
+
+    *substringCount = count;
+    free(copy);
+    return split;
 }
 
-void freeSubstrings(char **substrings, int count) {
-    // Hint: Free each substring, then free the substring array.
-
-    // Sample Case:
-    // Input: Array of substrings ["Hello", "World", "Test"], count = 3
-    // Operation: Frees memory for each substring and then the array itself
-
+// free memory
+void freeSubstrings(char **substrings, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
+        free(substrings[i]);
+    }
+    free(substrings);
 }
-
-
