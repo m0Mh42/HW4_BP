@@ -2,8 +2,7 @@ name: Question-2
 
 on:
   push:
-    branches: [ "main" ]
-    paths: [ "Q2/**" ]
+    branches: ["main"]
 
 jobs:
   build-and-run:
